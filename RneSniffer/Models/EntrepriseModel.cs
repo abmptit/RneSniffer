@@ -24,7 +24,6 @@ namespace RneSniffer.Models
 
         public string LibelleActiviteArabe { get; set; }
 
-
         public string FormeJuridique { get; set; }
         public string FormeJuridiqueArabe { get; set; }
 
@@ -36,13 +35,20 @@ namespace RneSniffer.Models
         public string SituationFiscaleArabe { get; set; }
 
         public string Region { get; set; }
+
         public string RegionArabe { get; set; }
 
         public string BureauRegional { get; set; }
 
         public string BureauRegionalArabe { get; set; }
 
-        public string Responsable { get; set; }
+        public string NomResponsable { get; set; }
+
+        public string NomResponsableArabe { get; set; }
+
+        public string PrenomResponsable { get; set; }
+
+        public string PrenomResponsableArabe { get; set; }
 
     }
 }
