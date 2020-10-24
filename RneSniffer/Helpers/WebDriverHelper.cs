@@ -58,15 +58,21 @@
         {
             using (HttpClient client = new HttpClient())
             {
-                var response = await client.GetAsync(SeleniumConfig.LastChromeDriverVersionUrl);
-                var chromeLastVersion = await response.Content.ReadAsStringAsync();
+                string chromeVersion = string.Empty;
+                if (string.IsNullOrEmpty(SeleniumConfig.ChromeDriverVersion))
+                {
+                    var response = await client.GetAsync(SeleniumConfig.LastChromeDriverVersionUrl);
+                    chromeVersion = await response.Content.ReadAsStringAsync();
+                    _log_.Info($"The last chrome driver: {SeleniumConfig.LastChromeDriverVersionUrl} {chromeVersion}");
+                }
+                else
+                {
+                    chromeVersion = SeleniumConfig.ChromeDriverVersion;
+                    _log_.Info($"The chrome driver: {chromeVersion}");
+                }
 
                 var path = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.ToString();
-                _log_.Info($"Spider Workdirectory is : {path}");
-                _log_.Info($"Spider Workdirectory is : {path}");
-
-                _log_.Info($"The last chrome driver: chromeLastVersion / Source {SeleniumConfig.LastChromeDriverVersionUrl}");
-                var zipFile = $"chromedriver_{chromeLastVersion}_win32.zip";
+                var zipFile = $"chromedriver_{chromeVersion}_win32.zip";
 
                 _log_.Info($"check if {Path.Combine(path, zipFile)} exist");
                 _log_.Info($"check if {Path.Combine(path, SeleniumConfig.WebDriverLocation, "chromedriver.exe")} exist");
@@ -77,7 +83,7 @@
                 {
                     using (var cli = new WebClient())
                     {
-                        var zipUrl = $"https://chromedriver.storage.googleapis.com/{chromeLastVersion}/chromedriver_win32.zip";
+                        var zipUrl = $"https://chromedriver.storage.googleapis.com/{chromeVersion}/chromedriver_win32.zip";
                         _log_.Info($"Download driver zip file from {zipUrl}");
                         var bytes = await Task.Run(() => cli.DownloadData(zipUrl));
 
@@ -89,18 +95,9 @@
 
                     FileInfo zipFileInfo = new FileInfo(Path.Combine(path, zipFile));
 
-                    //if (Directory.Exists(Path.Combine(driverDirFullPath, "chromedriver_win32")))
-                    //{
-                    //    Directory.Delete(Path.Combine(driverDirFullPath, "chromedriver_win32"));
-                    //}
                     _log_.Info($"Unzipping into {zipFileInfo.FullName}");
 
-                    //if (!Directory.Exists(SeleniumConfig.WebDriverLocation))
-                    //{
-                    //    Directory.CreateDirectory(SeleniumConfig.WebDriverLocation);
-                    //}
-
-                    ZipFile.ExtractToDirectory(zipFileInfo.FullName, SeleniumConfig.WebDriverLocation, System.Text.Encoding.ASCII);
+                    ZipFile.ExtractToDirectory(zipFileInfo.FullName, SeleniumConfig.WebDriverLocation, System.Text.Encoding.ASCII, true);
                 }
                 else
                 {
