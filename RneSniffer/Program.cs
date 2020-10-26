@@ -164,7 +164,7 @@ namespace RneSniffer
                     if (entrepriseModels.Count() >= 1000)
                     {
                         var json = JsonConvert.SerializeObject(entrepriseModels);
-                        File.WriteAllText($"export_{indexFile}.json", json, Encoding.UTF8);
+                        File.WriteAllText($"export_{annee}_{indexFile}.json", json, Encoding.UTF8);
                         entrepriseModels.Clear();
                         indexFile++;
                     }
