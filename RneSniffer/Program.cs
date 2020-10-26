@@ -20,7 +20,8 @@ namespace RneSniffer
         {
             await WebDriverHelper.EnsureChromeDriverAsync();
 
-            RecupererSociete();
+            var annee = (args != null && args.Count() > 0) ? args[0] : "2020";
+            RecupererSociete(annee);
         }
 
         //private static void RecupererSocieteDepuisJort()
@@ -94,7 +95,7 @@ namespace RneSniffer
         //    }
         //}
 
-        private static void RecupererSociete()
+        private static void RecupererSociete(string annee)
         {
             List<EntrepriseModel> entrepriseModels = new List<EntrepriseModel>();
             string rootUrlRNE = "https://www.registre-entreprises.tn/search/";
@@ -111,7 +112,7 @@ namespace RneSniffer
                 Thread.Sleep(500);
                 var selectAnneeInsertion = webDriver.FindElement(By.Name("searchRegistrePmRcc.registrePm.demande.anneeInsertion"));
                 selectAnneeInsertion.Click();
-                var option2020 = selectAnneeInsertion.FindElement(By.XPath("option[@value='2020']"));
+                var option2020 = selectAnneeInsertion.FindElement(By.XPath($"option[@value='{annee}']"));
                 option2020.Click();
                 var searchButton = webDriver.FindElement(By.XPath("//div[text() = 'Rechercher']"));
                 searchButton.Click();
