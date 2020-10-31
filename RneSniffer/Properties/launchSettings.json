@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RneSniffer": {
+      "commandName": "Project",
+      "commandLineArgs": "2019"
+    }
+  }
+}
