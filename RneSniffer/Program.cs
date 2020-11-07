@@ -24,6 +24,11 @@ namespace RneSniffer
             RecupererSociete(annee);
         }
 
+        //static async Task Main(string[] args)
+        //{
+        //    MergeFichiersAnnee("2019");
+        //}
+
         //private static void RecupererSocieteDepuisJort()
         //{
         //    List<EntrepriseModel> entrepriseModels = new List<EntrepriseModel>();
@@ -94,6 +99,30 @@ namespace RneSniffer
         //        }
         //    }
         //}
+        private static void MergeFichiersAnnee(string annee)
+        {
+            List<EntrepriseModel> entreprises = new List<EntrepriseModel>();
+            var files = Directory.GetFiles("backup\\fichiersBrut\\2019", $"*_{annee}_*.json");
+            foreach (var file in files)
+            {
+                var content = File.ReadAllText(file);
+                var entreprisesFiles = JsonConvert.DeserializeObject<List<EntrepriseModel>>(content);
+                foreach (var entrepriseFile in entreprisesFiles)
+                {
+                    if (entreprises.Any(e => e.IdentifiantUnique == entrepriseFile.IdentifiantUnique))
+                    {
+                        // doublons
+                    }
+                    else
+                    {
+                        entreprises.Add(entrepriseFile);
+                    }
+                }
+            }
+
+            var mergedContent = JsonConvert.SerializeObject(entreprises);
+            File.WriteAllText($"backup\\rne\\{annee}\\EntreprisesRNE_{annee}.json", mergedContent);            
+        }
 
         private static void RecupererSociete(string annee)
         {
