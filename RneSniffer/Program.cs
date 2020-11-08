@@ -26,7 +26,7 @@ namespace RneSniffer
 
         //static async Task Main(string[] args)
         //{
-        //    MergeFichiersAnnee("2019");
+        //    MergeFichiersAnnee("2018");
         //}
 
         //private static void RecupererSocieteDepuisJort()
@@ -102,7 +102,7 @@ namespace RneSniffer
         private static void MergeFichiersAnnee(string annee)
         {
             List<EntrepriseModel> entreprises = new List<EntrepriseModel>();
-            var files = Directory.GetFiles("backup\\fichiersBrut\\2019", $"*_{annee}_*.json");
+            var files = Directory.GetFiles($"backup\\fichiersBrut\\{annee}", $"*_{annee}_*.json");
             foreach (var file in files)
             {
                 var content = File.ReadAllText(file);
