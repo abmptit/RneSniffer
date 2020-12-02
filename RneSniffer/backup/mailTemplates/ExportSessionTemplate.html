@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Rapport de session d'accompagnement</title>
     <style>
         /* table, th, td {
         border: 1px solid black;
@@ -16,11 +16,10 @@
 
         .sTitle1 {
             background-color: white;
-            text-align: left;
             vertical-align: top;
             word-wrap: break-word;
             Font: 24pt 'Segoe UI';
-            text-align: left;
+            text-align: center;
             vertical-align: middle;
         }
 
@@ -76,7 +75,7 @@
 </head>
 
 <body>
-    {{#SessionAccomp}}
+    
     <table class="mainTable" cellspacing="0" cellpadding="0">
         <tr style="height: 10px;">
             <td class="sLogo" colspan="2">
@@ -140,9 +139,10 @@
                  UWOCx/nNQHTm1mCvID7uUO1CmSFEZbHnXKN8SwxEmmPLOkG0EaF2nVkQzjsGcThIMmrwYlSaxeFkpShc986fZfaEtr48jgnLnVKBFy/cnw2DOIpmqwXxCEjWd+YjONFxPYBSbOHQqlUEPpJ
                  hKK/Q5+c/Oz4Mz8/4/lfCVyX/7JMdJTKEVMJbhpuqMDN1P/kQSAqqUeYN2xRPzFYroqlLgiBfLGY5VZ/odf3f/p98/KY2a/2lz5eeUx2RabVBAebkqYbtBlL61Q4tV/wMnI0pb2Ceeiw
                  AAAABJRU5ErkJggg=="
-                    height="64px" />
+                     height="64px" />
             </td>
-            <td class="sTitle1" colspan="9">Rapport de la session
+            <td class="sTitle1" colspan="9">
+                Rapport de la session
                 d'accompagnement
             </td>
         </tr>
@@ -150,7 +150,7 @@
         <tr>
             <td class="sEmptyLine"></td>
         </tr>
-
+        {{#SessionAccomp}}
         <tr>
             <td class="sTitle2" colspan="12">Informations générales</td>
         </tr>
@@ -268,7 +268,7 @@
                 </table>
             </td>
         </tr>
-
+        {{/SessionAccomp}}
         <tr>
             <td class="sEmptyLine"></td>
         </tr>
@@ -282,8 +282,43 @@
             <td class="sEmptyLine"></td>
         </tr>
 
+        
+        <tr>
+            <td colspan="12">
+                <table class="table" id="problemes" style="width: 100%;" role="grid">
+                    <tr>
+                        <th>Problem</th>
+                        <th>Option retenue</th>
+                        <th>Priorite</th>
+                        <th>Délais d'exécution</th>
+                        <th>Action</th>
+                        <th>Taux de progression</th>
+                    </tr>
+                    <tbody>
+                        {{#ProblemeActions}}
+                        <tr>
+                            <td class="sTableContent" data-label="Problem">{{Probleme.Titre}}</td>
+                            <td class="sTableContent" data-label="Option retenue">{{OptionRetenue}}</td>
+                            <td class="sTableContent" data-label="Priorite">{{Priorite.Libelle}}</td>
+                            <td class="sTableContent" data-label="Délais">{{DelaisExecution.Libelle}}</td>
+                            <td class="sTableContent" data-label="Action">{{Descriptif}}</td>
+                            <td class="sTableContent" data-label="Taux">{{TauxProgression}} %</td>
+                        </tr>
+                        {{/ProblemeActions}}
+                        {{^ProblemeActions}}
+                        <tr>
+                            <td class="sTableContent" colspan="3">Aucune information saisie.</td>
+                        </tr>
+                        {{/ProblemeActions}}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
     </table>
 </body>
-{{/SessionAccomp}}
-
 </html>
