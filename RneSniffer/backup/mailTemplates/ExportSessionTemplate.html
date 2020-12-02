@@ -184,12 +184,19 @@
                     <tr>
                         <th>Date</th>
                         <th>Objet</th>
+                        <th>Type</th>
                     </tr>
                     <tbody>
                         {{#Reunion}}
                         <tr>
                             <td data-label="Date">{{DateDebut}}</td>
                             <td data-label="Objet">{{Objet}}</td>
+                            <td data-label="Objet">{{TypeReunion.Libelle}}</td>
+                        </tr>
+                        {{/Reunion}}
+                        {{^Reunion}}
+                        <tr>
+                            <td colspan="3">Aucune réunion planifiée</td>
                         </tr>
                         {{/Reunion}}
                     </tbody>
