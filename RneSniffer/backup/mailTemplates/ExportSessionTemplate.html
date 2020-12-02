@@ -34,6 +34,7 @@
             text-align: left;
             vertical-align: middle;
             color: white;
+            text-indent: 30px;
         }
 
         .sLogo {
@@ -63,13 +64,21 @@
             border: 0px;
             width: auto;
         }
+
+        .sTableContent {
+            text-align: center
+        }
+
+        .emptyColumn {
+            width: 10px;
+        }
     </style>
 </head>
 
 <body>
     {{#SessionAccomp}}
     <table class="mainTable" cellspacing="0" cellpadding="0">
-        <tr style="height:10px;">
+        <tr style="height: 10px;">
             <td class="sLogo" colspan="2">
                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjw
                  v8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABY3SURBVHhe1VsJoFXj9v/t4dxzp3OnbkpJoYEMTUQ9NCo8z5BHeJUm9QwllRfhUSmaEGVKGgnRv2dMPYSorq
@@ -130,10 +139,10 @@
                  LnlRIl+i5PcPMk4+o2kZTy1xJOfXImFEwyFESsthamGU79wJrThfuYI975ED1/wHJe36ex35aYy/bl0YSUkKu3yBAI0zAUZCIvQEOX18VAYPcV66xXjbCpUjGixDpKQEdnGhgAChPAyH+JN
                  UWOCx/nNQHTm1mCvID7uUO1CmSFEZbHnXKN8SwxEmmPLOkG0EaF2nVkQzjsGcThIMmrwYlSaxeFkpShc986fZfaEtr48jgnLnVKBFy/cnw2DOIpmqwXxCEjWd+YjONFxPYBSbOHQqlUEPpJ
                  hKK/Q5+c/Oz4Mz8/4/lfCVyX/7JMdJTKEVMJbhpuqMDN1P/kQSAqqUeYN2xRPzFYroqlLgiBfLGY5VZ/odf3f/p98/KY2a/2lz5eeUx2RabVBAebkqYbtBlL61Q4tV/wMnI0pb2Ceeiw
-                 AAAABJRU5ErkJggg==" height="64px" />
+                 AAAABJRU5ErkJggg=="
+                    height="64px" />
             </td>
-            <td class="sTitle1" colspan="9">
-                Rapport de la session
+            <td class="sTitle1" colspan="9">Rapport de la session
                 d'accompagnement
             </td>
         </tr>
@@ -151,8 +160,10 @@
         </tr>
 
         <tr>
+            <td class="emptyColumn"></td>
+            <td class="emptyColumn"></td>
             <td class="sLabelTitle" colspan="6">Nom de l'entreprise</td>
-            <td width="10px"></td>
+            <td class="emptyColumn"></td>
             <td class="sLabel" colspan="6">{{Entreprise.DenominationSociale}}</td>
         </tr>
 
@@ -161,9 +172,63 @@
         </tr>
 
         <tr>
+            <td class="emptyColumn"></td>
+            <td class="emptyColumn"></td>
             <td class="sLabelTitle" colspan="6">Titre de la session</td>
-            <td width="10px"></td>
+            <td class="emptyColumn"></td>
             <td class="sLabel" colspan="6">{{Libelle}}</td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+        <tr>
+            <td class="emptyColumn"></td>
+            <td class="emptyColumn"></td>
+            <td class="sLabelTitle" colspan="6">Statut de la session</td>
+            <td class="emptyColumn"></td>
+            <td class="sLabel" colspan="6">{{Statut.Libelle}}</td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+        <tr>
+            <td class="emptyColumn"></td>
+            <td class="emptyColumn"></td>
+            <td class="sLabelTitle" colspan="6">Date de la session</td>
+            <td class="emptyColumn"></td>
+            <td class="sLabel" colspan="6">{{DateDebut}}{{#DateFin}} - {{DateFin}}{{/DateFin}}</td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+        <tr>
+            <td class="emptyColumn"></td>
+            <td class="emptyColumn"></td>
+            <td class="sLabelTitle" colspan="6">Taux de progression</td>
+            <td class="emptyColumn"></td>
+            <td class="sLabel" colspan="6">{{TauxProgression}} %</td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+        <tr>
+            <td class="emptyColumn"></td>
+            <td class="emptyColumn"></td>
+            <td class="sLabelTitle" colspan="6">Observations</td>
+            <td class="emptyColumn"></td>
+            <td class="sLabel" colspan="6">{{Observations}}</td>
         </tr>
 
         <tr>
@@ -189,14 +254,14 @@
                     <tbody>
                         {{#Reunion}}
                         <tr>
-                            <td data-label="Date">{{DateDebut}}</td>
-                            <td data-label="Objet">{{Objet}}</td>
-                            <td data-label="Objet">{{TypeReunion.Libelle}}</td>
+                            <td class="sTableContent" data-label="Date">{{DateDebut}}</td>
+                            <td class="sTableContent" data-label="Objet">{{Objet}}</td>
+                            <td class="sTableContent" data-label="Objet">{{TypeReunion.Libelle}}</td>
                         </tr>
                         {{/Reunion}}
                         {{^Reunion}}
                         <tr>
-                            <td colspan="3">Aucune réunion planifiée</td>
+                            <td class="sTableContent" colspan="3">Aucune réunion planifiée</td>
                         </tr>
                         {{/Reunion}}
                     </tbody>
@@ -208,13 +273,6 @@
             <td class="sEmptyLine"></td>
         </tr>
 
-        <tr>
-            <td class="sTitle2" colspan="12">Les problèmes identifiés</td>
-        </tr>
-
-        <tr>
-            <td class="sEmptyLine"></td>
-        </tr>
 
         <tr>
             <td class="sTitle2" colspan="12">Le plan d'action</td>
