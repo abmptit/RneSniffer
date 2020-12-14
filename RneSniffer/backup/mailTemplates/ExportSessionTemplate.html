@@ -282,7 +282,7 @@
             <td class="sEmptyLine"></td>
         </tr>
 
-        
+
         <tr>
             <td colspan="12">
                 <table class="table" id="problemes" style="width: 100%;" role="grid">
@@ -302,14 +302,55 @@
                             <td class="sTableContent" data-label="Priorite">{{Priorite.Libelle}}</td>
                             <td class="sTableContent" data-label="Délais">{{DelaisExecution.Libelle}}</td>
                             <td class="sTableContent" data-label="Action">{{Descriptif}}</td>
-                            <td class="sTableContent" data-label="Taux">{{TauxProgression}} %</td>
+                            <td class="sTableContent" data-label="Taux">{{#TauxProgression}} {{.}} % {{/TauxProgression}}</td>
                         </tr>
                         {{/ProblemeActions}}
                         {{^ProblemeActions}}
                         <tr>
-                            <td class="sTableContent" colspan="3">Aucune information saisie.</td>
+                            <td class="sTableContent" colspan="6">Aucune information saisie.</td>
                         </tr>
                         {{/ProblemeActions}}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+        <tr>
+            <td class="sTitle2" colspan="12">Les mission d'expertise externe</td>
+        </tr>
+
+        <tr>
+            <td class="sEmptyLine"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="12">
+                <table class="table" id="problemes" style="width: 100%;" role="grid">
+                    <tr>
+                        <th>Type d'assistance</th>
+                        <th>Expert</th>
+                        <th>Estimation Nbe jours</th>
+                        <th>Livrables</th>
+                    </tr>
+                    <tbody>
+                        {{#SessionAccomp.Mission}}
+                        <tr>
+                            <td class="sTableContent" data-label="Problem">{{TypeAssistance.Libelle}}</td>
+                            <td class="sTableContent" data-label="Option retenue">{{Expert.Nom}}</td>
+                            <td class="sTableContent" data-label="Priorite">{{NombreHommeJour}}</td>
+                            <td class="sTableContent" data-label="Délais">{{LivrablesAttendus}}</td>
+                        </tr>
+                        {{/SessionAccomp.Mission}}
+                        {{^SessionAccomp.Mission}}
+                        <tr>
+                            <td class="sTableContent" colspan="6">Aucune mission d'expertise externe saisie.</td>
+                        </tr>
+                        {{/SessionAccomp.Mission}}
                     </tbody>
                 </table>
             </td>
